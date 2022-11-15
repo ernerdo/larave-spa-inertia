@@ -58,7 +58,10 @@ const destroy = () => {
                                 >Editar</button>
                             </form>
                             <hr class="my-6">
-                            <a href="#" @click.prevent="destroy">
+                            <inertia-link :href="route('notes.index')">
+                                Volver
+                            </inertia-link>
+                            <a href="#" @click.prevent="destroy" style="margin-left: 10px">
                                 Eliminar Nota
                             </a>
                         </div>
