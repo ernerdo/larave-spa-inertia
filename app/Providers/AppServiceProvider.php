@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
         if (!app()->isLocal()) {
             \URL::forceScheme('https');
         }
+        Inertia::share('flash', function () {
+            return ['status' => Session::get('status')];
+        });
     }
 }
