@@ -49,7 +49,7 @@ const buscar = () => {
                                         </inertia-link>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <inertia-link :href="route('notes.edit', note.id)">
+                                        <inertia-link :href="route('notes.edit', note.id)" class="px-3 py-2 mr-2 rounded text-white text-sm font-bold whitespace-no-wrap bg-yellow-500 hover:bg-yellow-800">
                                             edit
                                         </inertia-link>
                                     </td>
