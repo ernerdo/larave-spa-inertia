@@ -51,7 +51,9 @@ class NoteController extends Controller
 
     public function show(Note $note)
     {
-        return Inertia::render('Notes/Show',compact('note'));
+        $code = 'Lo has encontrado 🥳 codigo: 9542';
+
+        return Inertia::render('Notes/Show',compact('note','code'));
     }
 
     /**

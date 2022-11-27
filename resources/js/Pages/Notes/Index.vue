@@ -7,6 +7,7 @@ defineProps({
 });
 const valor = ref(null)
 const buscar = () => {
+    console.log('Andas cerca 💣')
     let q= valor.value;
     Inertia.get(route('notes.index', {q}), {}, {preserveState: true});
 };
@@ -31,17 +32,19 @@ const buscar = () => {
                     </div>
                     <div class="md:col-span-2 mt-5 md:mt-0">
                         <div class="shadow bg-white md:rounded-md p-4">
-                            <input type="text" class="form-input rounded-md shadow-sm" placeholder="Buscar..." v-model="valor" @keyup="buscar">
-                            <inertia-link :href="route('notes.create')" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">
-                                Crear
-                            </inertia-link>
+                            <div class="flex justify-between p-4">
+                                <input type="text" class="form-input rounded-md shadow-sm" placeholder="Search..." v-model="valor" @keyup="buscar">
+                                <inertia-link :href="route('notes.create')" class="px-3 py-2 mr-2 rounded text-white text-sm font-bold whitespace-no-wrap bg-blue-600 hover:bg-blue-800">
+                                    Create
+                                </inertia-link>
+                            </div>
                             <table>
                                 <tr v-for="note in notes">
                                     <td class="border px-4 py-2">
                                         {{ note.excerpt }}
                                     </td>
                                     <td class="px-4 py-2">
-                                        <inertia-link :href="route('notes.show', note.id)">
+                                        <inertia-link :href="route('notes.show', note.id)" class="px-3 py-2 mr-2 rounded text-white text-sm font-bold whitespace-no-wrap bg-green-500 hover:bg-green-800">
                                             show
                                         </inertia-link>
                                     </td>
