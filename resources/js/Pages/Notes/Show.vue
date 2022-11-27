@@ -3,6 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 
 defineProps({
     note: Object,
+    code: String,
 });
 </script>
 <template>
@@ -20,6 +21,9 @@ defineProps({
                         <div class="px-4 sm:px0">
                             <h3 class="text-lg text-gray-900">Detalle de una nota</h3>
                             <p class="text-sm text-gray-600">{{ note.excerpt }}</p>
+                            <br>
+                            <p class="underline decoration-wavy"> 👣 - {{code.slice(3,5)}}</p>
+                            <!-- ya casi lo tienes, estas a un paso 🐞-->
                         </div>
                     </div>
                     <div class="md:col-span-2 mt-5 md:mt-0">

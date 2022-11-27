@@ -54,14 +54,14 @@ const destroy = () => {
                                     rows="8"
                                 ></textarea>
                                 <button
-                                    class="font-bold py-2 px-4 rounded-md"
+                                    class="px-3 py-2 mr-2 rounded text-white text-sm font-bold whitespace-no-wrap bg-green-500 hover:bg-green-800"
                                 >Editar</button>
                             </form>
                             <hr class="my-6">
-                            <inertia-link :href="route('notes.index')">
+                            <inertia-link :href="route('notes.index')" class="px-3 py-2 mr-2 rounded text-white text-sm font-bold whitespace-no-wrap bg-gray-500 hover:bg-gray-800">
                                 Volver
                             </inertia-link>
-                            <a href="#" @click.prevent="destroy" style="margin-left: 10px">
+                            <a href="#" @click.prevent="destroy" style="margin-left: 10px" class="px-3 py-2 mr-2 rounded text-white text-sm font-bold whitespace-no-wrap bg-red-500 hover:bg-red-800">
                                 Eliminar Nota
                             </a>
                         </div>
