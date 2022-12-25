@@ -7,7 +7,6 @@ defineProps({
 });
 const valor = ref(null)
 const buscar = () => {
-    console.log('Andas cerca 💣')
     let q= valor.value;
     Inertia.get(route('notes.index', {q}), {}, {preserveState: true});
 };

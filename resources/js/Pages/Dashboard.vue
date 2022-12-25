@@ -17,7 +17,6 @@ import Welcome from '@/Components/Welcome.vue';
                     <div class="flex flex-col justify-center items-center">
                         <h2 class="underline uppercase decoration-4">Construction</h2>
                         <img alt="gif" src="https://media.giphy.com/media/mTPjPA6SSXgTsnZ1Dh/giphy.gif" class="max-h-fit max-w-full object-cover">
-                        <!--  EXCELENTE ME HAS ENCONTRADO PERO ACA NO ES 🥲 -->
                     </div>
                 </div>
             </div>
