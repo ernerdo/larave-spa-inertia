@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 
@@ -12,8 +13,9 @@ class NoteController extends Controller
 
     public function index(Request $request)
     {
+        $user = Auth::user();
         return Inertia::render('Notes/Index', [
-            'notes' => Note::latest()
+            'notes' => Note::where('created_by',$user->id)
                 ->where('excerpt', 'LIKE', "%$request->q%")
                 ->get()
         ]);
@@ -41,28 +43,35 @@ class NoteController extends Controller
             'excerpt' => 'required',
             'content' => 'required',
         ]);
+        $user = Auth::user();
+        $note = Note::create([
+            'excerpt' => $request->excerpt,
+            'content' => $request->content,
+            'created_by' => $user->id
+        ]);
 
-        $note = Note::create($request->all());
-
-        return redirect()->route('notes.edit', $note->id)->with('status','Nota creada');
+        return redirect()->route('notes.edit', $note->id)->with('status', 'Nota creada');
     }
-
 
 
     public function show(Note $note)
     {
+        $user = Auth::user();
+        if (is_null($note->user) || $note->user->id !== $user->id) {
 
-        return Inertia::render('Notes/Show',compact('note',));
+            return redirect()->route('notes.index');
+        }
+        return Inertia::render('Notes/Show', compact('note',));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Note  $note
-     * @return \Inertia\Response
-     */
+
     public function edit(Note $note)
     {
+        $user = Auth::user();
+        if (is_null($note->user) || $note->user->id !== $user->id) {
+
+            return redirect()->route('notes.index');
+        }
         return Inertia::render('Notes/Edit',compact('note'));
     }
 
@@ -80,6 +89,11 @@ class NoteController extends Controller
             'excerpt' => 'required',
             'content' => 'required',
         ]);
+        $user = Auth::user();
+        if (is_null($note->user) || $note->user->id !== $user->id) {
+
+            return redirect()->route('notes.index');
+        }
 
         $note->update($request->all());
 
@@ -94,6 +108,12 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
+        $user = Auth::user();
+        if (is_null($note->user) || $note->user->id !== $user->id) {
+
+            return redirect()->route('notes.index');
+        }
+
         $note->delete();
 
         return redirect()->route('notes.index')->with('status','Nota eliminada');

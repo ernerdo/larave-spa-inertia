@@ -58,4 +58,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * get the notes that owns the user
+     */
+    public function notes()
+    {
+        return $this->hasMany(Note::class,'created_by');
+    }
 }
