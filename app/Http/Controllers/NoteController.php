@@ -17,26 +17,18 @@ class NoteController extends Controller
         return Inertia::render('Notes/Index', [
             'notes' => Note::where('created_by',$user->id)
                 ->where('excerpt', 'LIKE', "%$request->q%")
+                ->orderby('id','desc')
                 ->get()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Inertia\Response
-     */
+
     public function create()
     {
         return Inertia::render('Notes/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -75,13 +67,7 @@ class NoteController extends Controller
         return Inertia::render('Notes/Edit',compact('note'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function update(Request $request, Note $note)
     {
 
@@ -100,12 +86,7 @@ class NoteController extends Controller
         return redirect()->route('notes.index')->with('status','Nota actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Note $note)
     {
         $user = Auth::user();
